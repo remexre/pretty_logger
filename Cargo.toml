@@ -1,12 +1,12 @@
 [package]
 authors = ["Nathaniel Ringo <remexre@gmail.com>"]
-description = "A pretty logger similar to `pretty_env_logger`, but configured from the `init` function instead of from an environment variable."
+description = "A pretty logger similar to pretty_env_logger, but configured from the init function instead of from an environment variable."
 documentation = "https://docs.rs/pretty_logger"
 homepage = "https://github.com/remexre/pretty_logger"
 license = "MIT/Apache-2.0"
 name = "pretty_logger"
 repository = "https://github.com/remexre/pretty_logger"
-version = "0.1.0"
+version = "0.1.1"
 
 [dependencies]
 ansi_term = "^0.9.0"
