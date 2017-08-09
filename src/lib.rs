@@ -223,6 +223,14 @@ pub fn init(destination: Destination, level: LogLevelFilter, theme: Theme) -> Re
     Logger::new(destination, level, theme).set_logger()
 }
 
+/// Initializes the global logger to log at the given level, using the defaults
+/// for other fields.
+pub fn init_level(level: LogLevelFilter) -> Result<(), SetLoggerError> {
+    let mut logger = Logger::default();
+    logger.level = level;
+    logger.set_logger()
+}
+
 /// Initializes the global logger with the defaults.
 pub fn init_to_defaults() -> Result<(), SetLoggerError> {
     Logger::default().set_logger()
