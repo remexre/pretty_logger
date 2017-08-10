@@ -128,7 +128,7 @@ impl Default for Logger {
 impl Log for Logger {
     fn enabled(&self, metadata: &LogMetadata) -> bool {
         self.level.to_log_level().map(|level| {
-            metadata.level() >= level
+            metadata.level() <= level
         }).unwrap_or(false)
     }
 
