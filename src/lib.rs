@@ -142,7 +142,7 @@ impl Log for Logger {
         let target = record.target();
         let target_length = self.update_target_width(target.graphemes(true).count());
 
-        let _ = writeln!(self.destination.write(), "|{}|{:.*}|{:.*}|{}",
+        let _ = writeln!(self.destination.write(), "{}|{:.*}|{:.*}|{}",
             self.theme.paint_log_level(record.level()), module_length, module,
             target_length, target, record.args());
     }
