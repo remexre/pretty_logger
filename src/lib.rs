@@ -209,7 +209,7 @@ impl Default for Theme {
     fn default() -> Theme {
         Theme {
             error: Colour::Red.bold(),
-            warn: Colour::Yellow.normal(),
+            warn: Colour::Yellow.bold(),
             info: Colour::Cyan.normal(),
             debug: Colour::White.normal(),
             trace: Colour::White.dimmed(),
