@@ -94,9 +94,9 @@ impl Logger {
 
     fn update_module_width(&self, width: usize) -> usize {
         loop {
-            let old = self.max_module_width.load(Ordering::Relaxed);
+            let old = self.max_module_width.load(Ordering::SeqCst);
             let new = max(old, width);
-            if self.max_module_width.compare_and_swap(old, new, Ordering::Relaxed) == old {
+            if self.max_module_width.compare_and_swap(old, new, Ordering::SeqCst) == old {
                 return new;
             }
         }
@@ -104,9 +104,9 @@ impl Logger {
 
     fn update_target_width(&self, width: usize) -> usize {
         loop {
-            let old = self.max_target_width.load(Ordering::Relaxed);
+            let old = self.max_target_width.load(Ordering::SeqCst);
             let new = max(old, width);
-            if self.max_target_width.compare_and_swap(old, new, Ordering::Relaxed) == old {
+            if self.max_target_width.compare_and_swap(old, new, Ordering::SeqCst) == old {
                 return new;
             }
         }
