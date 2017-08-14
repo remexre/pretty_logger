@@ -138,13 +138,19 @@ impl Log for Logger {
         }
 
         let module = record.location().module_path();
-        let module_length = self.update_module_width(module.graphemes(true).count());
         let target = record.target();
-        let target_length = self.update_target_width(target.graphemes(true).count());
+        let module_length = self.update_module_width(module.graphemes(true).count());
 
-        let _ = writeln!(self.destination.write(), "{}|{:.*}|{:.*}|{}",
-            self.theme.paint_log_level(record.level()), module_length, module,
-            target_length, target, record.args());
+        let _ = if module == target {
+            writeln!(self.destination.write(), "{}|{:.*}|{}",
+                self.theme.paint_log_level(record.level()), module_length,
+                module, record.args())
+        } else {
+            let target_length = self.update_target_width(target.graphemes(true).count());
+            writeln!(self.destination.write(), "{}|{:.*}|{:.*}|{}",
+                self.theme.paint_log_level(record.level()), module_length,
+                module, target_length, target, record.args())
+        };
     }
 }
 
