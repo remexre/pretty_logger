@@ -226,12 +226,14 @@ impl Default for Theme {
 
 /// Initializes the global logger.
 pub fn init(destination: Destination, level: LogLevelFilter, theme: Theme) -> Result<(), SetLoggerError> {
+    platform_init();
     Logger::new(destination, level, theme).set_logger()
 }
 
 /// Initializes the global logger to log at the given level, using the defaults
 /// for other fields.
 pub fn init_level(level: LogLevelFilter) -> Result<(), SetLoggerError> {
+    platform_init();
     let mut logger = Logger::default();
     logger.level = level;
     logger.set_logger()
@@ -239,5 +241,15 @@ pub fn init_level(level: LogLevelFilter) -> Result<(), SetLoggerError> {
 
 /// Initializes the global logger with the defaults.
 pub fn init_to_defaults() -> Result<(), SetLoggerError> {
+    platform_init();
     Logger::default().set_logger()
 }
+
+#[cfg(windows)]
+fn platform_init() {
+    use ansi_term::enable_ansi_support;
+    let _ = enable_ansi_support();
+}
+
+#[cfg(not(windows))]
+fn platform_init() {}
