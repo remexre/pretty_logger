@@ -1,3 +1,7 @@
+.*
+!.gitignore
+!.travis.yml
+
 /target/
 **/*.rs.bk
 Cargo.lock
